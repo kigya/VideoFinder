@@ -16,12 +16,9 @@ struct VideoView: View {
         VideoPlayer(player: player)
                 .edgesIgnoringSafeArea(.all)
                 .onAppear {
-                    // Unwrapping optional
+                   
                     if let link = video.videoFiles.first?.link {
-                        // Setting the URL of the video file
                         player = AVPlayer(url: URL(string: link)!)
-
-                        // Play the video
                         player.play()
                     }
                 }

@@ -1,35 +1,31 @@
 //
-//  VideoManager.swift
+//  SearchVideoManager.swift
 //  VideoFinder
 //
-//  Created by Kirill Borichevskiy on 19/04/2022.
+//  Created by Kirill Borichevskiy on 28/04/2022.
 //
 
 import Foundation
 
-enum Query: String, CaseIterable {
-    case nature, food, sea, city
-}
-
-class VideoManager: ObservableObject {
+class SearchVideoManager: ObservableObject {
     @Published private(set) var videos: [Video] = []
-    @Published var selectedQuery: Query = Query.nature {
+    @Published var selectedText: String = "programming" {
         didSet {
             Task.init {
-                await findVideos(topic: selectedQuery)
+                await findVideos(topic: selectedText)
             }
         }
     }
 
     init() {
         Task.init {
-            await findVideos(topic: selectedQuery)
+            await findVideos(topic: selectedText)
         }
     }
 
-    func findVideos(topic: Query) async {
+    func findVideos(topic: String) async {
         do {
-            guard let url = URL(string: "https://api.pexels.com/videos/search?query=\(topic)&per_page=10&orientation=portrait") else {
+            guard let url = URL(string: "https://api.pexels.com/videos/search?query=\(topic.lowercased())&per_page=10&orientation=portrait") else {
                 fatalError("Missing URL")
             }
 
@@ -58,35 +54,5 @@ class VideoManager: ObservableObject {
         } catch {
             print("Error fetching data from Pexels: \(error)")
         }
-    }
-}
-
-struct ResponseBody: Decodable {
-    var page: Int
-    var perPage: Int
-    var totalResults: Int
-    var url: String
-    var videos: [Video]
-
-}
-
-struct Video: Identifiable, Decodable {
-    var id: Int
-    var image: String
-    var duration: Int
-    var user: User
-    var videoFiles: [VideoFile]
-
-    struct User: Identifiable, Decodable {
-        var id: Int
-        var name: String
-        var url: String
-    }
-
-    struct VideoFile: Identifiable, Decodable {
-        var id: Int
-        var quality: String
-        var fileType: String
-        var link: String
     }
 }
