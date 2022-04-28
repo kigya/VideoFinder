@@ -14,86 +14,112 @@ struct ContentView: View {
     var columns = [GridItem(.adaptive(minimum: 160), spacing: 20)]
 
     var body: some View {
-        SearchBar(text: $searchText)
-            .padding(.top)
-            .padding(.bottom)
-        if (searchText.isEmpty) {
-            NavigationView {
-                VStack {
-                    HStack {
-                        ForEach(Query.allCases, id: \.self) { searchQuery in
-                            QueryTag(query: searchQuery, isSelected: videoManager.selectedQuery == searchQuery)
-                                    .onTapGesture {
-                                        videoManager.selectedQuery = searchQuery
-                                    }
-                        }
-                        
-                    }
-
-                    ScrollView {
-                        if videoManager.videos.isEmpty {
-                            ProgressView()
-                        } else {
-                            LazyVGrid(columns: columns, spacing: 20) {
-                                ForEach(videoManager.videos, id: \.id) { video in
-                                    NavigationLink {
-                                        VideoView(video: video)
-                                    } label: {
-                                        VideoCard(video: video)
-                                    }
+        ZStack {
+            VStack {
+                Group {
+                    SearchBar(text: $searchText)
+                        .padding(.top)
+                        .padding(.bottom)
+                        .isHidden(PlayingState.isPlaying, remove: true)
+                    
+                }.onTapGesture {
+                    searchVideoManager.selectedText = searchText.stripped
+                }
+                
+                if (searchText.isEmpty) {
+                    NavigationView {
+                        VStack {
+                            HStack {
+                                ForEach(Query.allCases, id: \.self) { searchQuery in
+                                    QueryTag(query: searchQuery, isSelected: videoManager.selectedQuery == searchQuery)
+                                            .onTapGesture {
+                                                videoManager.selectedQuery = searchQuery
+                                            }
                                 }
                             }
-                                    .padding()
+                            ScrollView {
+                                if videoManager.videos.isEmpty {
+                                    ProgressView()
+                                } else {
+                                    LazyVGrid(columns: columns, spacing: 20) {
+                                        ForEach(videoManager.videos, id: \.id) { video in
+                                            NavigationLink {
+                                                VideoView(video: video)
+                                            } label: {
+                                                VideoCard(video: video)
+                                            }
+                                        }
+                                    }
+                                            .padding()
+                                }
+                            }
+                                    .frame(maxWidth: .infinity)
                         }
+                                .background(Color("AccentColor"))
+                                .navigationBarHidden(true)
                     }
-                            .frame(maxWidth: .infinity)
-                    
+                } else {
+                    VStack {
+                        Button {
+                            searchVideoManager.selectedText = searchText.stripped
+                        } label: {
+                            Text("Show")
+                                    .font(.caption)
+                                    .bold()
+                                    .foregroundColor(Color("AccentColor"))
+                                    .padding(10)
+                                    .background(Color("AccentOrange"))
+                                    .cornerRadius(10)
+                        }.background(Color("AccentColor"))
+                            .isHidden(PlayingState.isPlaying, remove: true)
+                    }.background(Color("AccentColor"))
+                    NavigationView {
+                        VStack {
+                            ScrollView {
+                                if searchVideoManager.videos.isEmpty {
+                                    ProgressView()
+                                } else {
+                                    LazyVGrid(columns: columns, spacing: 20) {
+                                        ForEach(searchVideoManager.videos, id: \.id) { video in
+                                            NavigationLink {
+                                                VideoView(video: video).onTapGesture {
+                                                    PlayingState.isPlaying = true
+                                                }
+                                            } label: {
+                                                VideoCard(video: video)
+                                            }
+                                        }.onTapGesture {
+                                            PlayingState.isPlaying = true
+                                        }
+                                    }
+                                            .padding()
+                                }
+                            }
+                                    .frame(maxWidth: .infinity)
+                        }     .background(Color("AccentColor"))
+                                
+                                .navigationBarHidden(true)
+                    }
                 }
-                        .background(Color("AccentColor"))
-                        .navigationBarHidden(true)
+            }
+        }.background(Color("AccentColor"))
+    }
+}
+
+extension View {
+    @ViewBuilder func isHidden(_ hidden: Bool, remove: Bool = false) -> some View {
+        if hidden {
+            if !remove {
+                self.hidden()
             }
         } else {
-            Button {
-                searchVideoManager.selectedText = searchText
-            } label: {
-                Text("Show")
-                        .font(.caption)
-                        .bold()
-                        .foregroundColor(Color("AccentColor"))
-                        .padding(10)
-                        .background(Color("AccentOrange"))
-                        .cornerRadius(10)
-            }
-
-            NavigationView {
-                VStack {
-
-                    ScrollView {
-                        if searchVideoManager.videos.isEmpty {
-                            ProgressView()
-                        } else {
-                            LazyVGrid(columns: columns, spacing: 20) {
-                                ForEach(searchVideoManager.videos, id: \.id) { video in
-                                    NavigationLink {
-                                    
-                                        VideoView(video: video)
-                                    } label: {
-                                        VideoCard(video: video)
-                                    }
-                                }
-                            }
-                                    .padding()
-                        }
-                    }
-                            .frame(maxWidth: .infinity)
-
-                }
-                        .background(Color("AccentColor"))
-                        .navigationBarHidden(true)
-            }
+            self
         }
-        
     }
+}
+
+struct PlayingState {
+    public static var isPlaying = false
 }
 
 struct ContentView_Previews: PreviewProvider {

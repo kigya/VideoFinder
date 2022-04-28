@@ -18,6 +18,9 @@
 		22D70ECE27972C6B00C0BB88 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D70ECD27972C6B00C0BB88 /* VideoView.swift */; };
 		22D70ED027972FE800C0BB88 /* QueryTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D70ECF27972FE800C0BB88 /* QueryTag.swift */; };
 		F32A56B9281A00B200D270A6 /* SearchVideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32A56B8281A00B200D270A6 /* SearchVideoManager.swift */; };
+		F32A56BD281AC7CB00D270A6 /* ResponseBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32A56BC281AC7CB00D270A6 /* ResponseBody.swift */; };
+		F32A56BF281AC7FF00D270A6 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32A56BE281AC7FF00D270A6 /* Video.swift */; };
+		F32A56C2281AC84400D270A6 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32A56C1281AC84400D270A6 /* Extension.swift */; };
 		F332378F2819F8F700C69A95 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F332378E2819F8F700C69A95 /* SearchBar.swift */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +37,9 @@
 		22D70ECD27972C6B00C0BB88 /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		22D70ECF27972FE800C0BB88 /* QueryTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryTag.swift; sourceTree = "<group>"; };
 		F32A56B8281A00B200D270A6 /* SearchVideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVideoManager.swift; sourceTree = "<group>"; };
+		F32A56BC281AC7CB00D270A6 /* ResponseBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseBody.swift; sourceTree = "<group>"; };
+		F32A56BE281AC7FF00D270A6 /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
+		F32A56C1281AC84400D270A6 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		F332378E2819F8F700C69A95 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,9 +73,10 @@
 		225F73932797135300C9C2FF /* VideoFinder */ = {
 			isa = PBXGroup;
 			children = (
-				F32A56B8281A00B200D270A6 /* SearchVideoManager.swift */,
+				F32A56C0281AC83200D270A6 /* Extensions */,
+				F32A56BB281AC7AE00D270A6 /* Model */,
 				225F73942797135300C9C2FF /* VideoFinderApp.swift */,
-				225F73A227971E4900C9C2FF /* VideoManager.swift */,
+				F32A56BA281AC78400D270A6 /* VideoManager */,
 				22D70ECC27972C5E00C0BB88 /* Views */,
 				225F73A4279726D200C9C2FF /* Components */,
 				225F73982797135400C9C2FF /* Assets.xcassets */,
@@ -105,6 +112,32 @@
 				F332378E2819F8F700C69A95 /* SearchBar.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		F32A56BA281AC78400D270A6 /* VideoManager */ = {
+			isa = PBXGroup;
+			children = (
+				225F73A227971E4900C9C2FF /* VideoManager.swift */,
+				F32A56B8281A00B200D270A6 /* SearchVideoManager.swift */,
+			);
+			path = VideoManager;
+			sourceTree = "<group>";
+		};
+		F32A56BB281AC7AE00D270A6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F32A56BC281AC7CB00D270A6 /* ResponseBody.swift */,
+				F32A56BE281AC7FF00D270A6 /* Video.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F32A56C0281AC83200D270A6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F32A56C1281AC84400D270A6 /* Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,9 +214,12 @@
 				22D70ECE27972C6B00C0BB88 /* VideoView.swift in Sources */,
 				225F73972797135300C9C2FF /* ContentView.swift in Sources */,
 				225F73952797135300C9C2FF /* VideoFinderApp.swift in Sources */,
+				F32A56C2281AC84400D270A6 /* Extension.swift in Sources */,
 				225F73A82797279000C9C2FF /* ModelData.swift in Sources */,
 				22D70ED027972FE800C0BB88 /* QueryTag.swift in Sources */,
 				F332378F2819F8F700C69A95 /* SearchBar.swift in Sources */,
+				F32A56BD281AC7CB00D270A6 /* ResponseBody.swift in Sources */,
+				F32A56BF281AC7FF00D270A6 /* Video.swift in Sources */,
 				225F73A327971E4900C9C2FF /* VideoManager.swift in Sources */,
 				F32A56B9281A00B200D270A6 /* SearchVideoManager.swift in Sources */,
 				225F73A6279726DD00C9C2FF /* VideoCard.swift in Sources */,
