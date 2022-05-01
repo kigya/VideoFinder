@@ -71,8 +71,7 @@ Now close your Xcode project. Then locate and open the .xcworkspace Xcode projec
 
 
 ## Demo
-
-https://user-images.githubusercontent.com/73034324/166156079-b2d8d3fb-1a28-487f-b03a-32434a24c3bc.mov
+https://user-images.githubusercontent.com/73034324/166156139-e242b2ce-b15f-445a-8365-99e9e9ff56ef.mov
 
 
 
