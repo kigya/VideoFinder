@@ -18,14 +18,15 @@ struct ContentView: View {
             VStack {
                 Group {
                     SearchBar(text: $searchText)
-                        .padding(.top)
-                        .padding(.bottom)
-                        .isHidden(PlayingState.isPlaying, remove: true)
-                    
-                }.onTapGesture {
-                    searchVideoManager.selectedText = searchText.stripped
+                            .padding(.top)
+                            .padding(.bottom)
+                            .isHidden(PlayingState.isPlaying, remove: true)
+
                 }
-                
+                        .onTapGesture {
+                            searchVideoManager.selectedText = searchText.stripped
+                        }
+
                 if (searchText.isEmpty) {
                     NavigationView {
                         VStack {
@@ -63,16 +64,18 @@ struct ContentView: View {
                         Button {
                             searchVideoManager.selectedText = searchText.stripped
                         } label: {
-                            Text("Show")
+                            Text("\(searchText)")
                                     .font(.caption)
                                     .bold()
                                     .foregroundColor(Color("AccentColor"))
                                     .padding(10)
                                     .background(Color("AccentOrange"))
                                     .cornerRadius(10)
-                        }.background(Color("AccentColor"))
-                            .isHidden(PlayingState.isPlaying, remove: true)
-                    }.background(Color("AccentColor"))
+                        }
+                                .background(Color("AccentColor"))
+                                .isHidden(PlayingState.isPlaying, remove: true)
+                    }
+                            .background(Color("AccentColor"))
                     NavigationView {
                         VStack {
                             ScrollView {
@@ -88,21 +91,24 @@ struct ContentView: View {
                                             } label: {
                                                 VideoCard(video: video)
                                             }
-                                        }.onTapGesture {
-                                            PlayingState.isPlaying = true
                                         }
+                                                .onTapGesture {
+                                                    PlayingState.isPlaying = true
+                                                }
                                     }
                                             .padding()
                                 }
                             }
                                     .frame(maxWidth: .infinity)
-                        }     .background(Color("AccentColor"))
-                                
+                        }
+                                .background(Color("AccentColor"))
+
                                 .navigationBarHidden(true)
                     }
                 }
             }
-        }.background(Color("AccentColor"))
+        }
+                .background(Color("AccentColor"))
     }
 }
 

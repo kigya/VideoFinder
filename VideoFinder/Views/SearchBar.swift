@@ -13,7 +13,7 @@ struct SearchBar: View {
     @State private var isEditing = false
 
     var body: some View {
-        
+
         HStack {
 
             TextField("Search...", text: $text)
